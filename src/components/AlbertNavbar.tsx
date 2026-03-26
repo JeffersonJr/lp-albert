@@ -19,47 +19,58 @@ const AlbertNavbar = () => {
     return (
         <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
             <div className="container mx-auto flex items-center justify-between h-16 px-4">
-                <a href="#" className="flex items-center gap-2">
-                    <img src="https://albert.evolves.site/img/logo-green.png" alt="Albert IA" className="h-8" />
+                <a href="#" className="flex items-center gap-2 outline-none focus-visible:ring-2 focus-visible:ring-albert-teal rounded-sm" aria-label="Voltar ao início">
+                    <img 
+                        src="https://albert.evolves.site/img/logo-green.png" 
+                        alt="Albert IA Logo" 
+                        className="h-8 w-auto" 
+                        width="118" 
+                        height="32"
+                    />
                 </a>
 
-                <div className="hidden md:flex items-center gap-8">
+                <div className="hidden lg:flex items-center gap-6">
                     {navItems.map((item) => (
                         <a
                             key={item.label}
                             href={item.href}
-                            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors whitespace-nowrap"
                         >
                             {item.label}
                         </a>
                     ))}
                 </div>
 
-                <div className="hidden md:block">
+                <div className="hidden lg:block">
                     <Button variant="cta" onClick={scrollToForm}>
                         <Zap className="w-4 h-4 mr-1" />
                         Falar com Especialista
                     </Button>
                 </div>
 
-                <button className="md:hidden" onClick={() => setOpen(!open)}>
+                <button 
+                    className="lg:hidden p-2 -mr-2 text-foreground focus-visible:ring-2 focus-visible:ring-albert-teal rounded-lg transition-colors" 
+                    onClick={() => setOpen(!open)}
+                    aria-label={open ? "Fechar menu" : "Abrir menu"}
+                    aria-expanded={open}
+                >
                     {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
                 </button>
             </div>
 
             {open && (
-                <div className="md:hidden bg-background border-t border-border px-4 pb-4">
+                <div className="lg:hidden bg-background border-t border-border px-4 pb-4 shadow-xl">
                     {navItems.map((item) => (
                         <a
                             key={item.label}
                             href={item.href}
                             onClick={() => setOpen(false)}
-                            className="block py-3 text-sm font-medium text-muted-foreground hover:text-foreground"
+                            className="block py-4 text-base font-medium text-muted-foreground hover:text-foreground border-b border-border/50 last:border-0"
                         >
                             {item.label}
                         </a>
                     ))}
-                    <Button variant="cta" className="w-full mt-2" onClick={() => { setOpen(false); scrollToForm(); }}>
+                    <Button variant="cta" size="lg" className="w-full mt-4" onClick={() => { setOpen(false); scrollToForm(); }}>
                         <Zap className="w-4 h-4 mr-1" />
                         Falar com Especialista
                     </Button>

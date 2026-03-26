@@ -10,21 +10,27 @@ import FAQSection from "@/components/FAQSection";
 import FinalCTA from "@/components/FinalCTA";
 import AlbertFooter from "@/components/AlbertFooter";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
+import ExitIntentModal from "@/components/ExitIntentModal";
 
 const Index = () => {
     return (
-        <div className="min-h-screen bg-background">
+        <div className="min-h-screen bg-background text-foreground selection:bg-albert-teal/[0.1] selection:text-albert-teal">
+            <ExitIntentModal />
             <WhatsAppFloat />
             <AlbertNavbar />
-            <HeroSection />
-            <SocialProof />
-            <PainSolutionSection />
-            <HowItWorksSection />
-            <MetricsSection />
-            <TestimonialsSection />
-            <PricingSection />
-            <FAQSection />
-            <FinalCTA />
+            
+            <main id="main-content">
+                <HeroSection />
+                <SocialProof />
+                <PainSolutionSection />
+                <HowItWorksSection />
+                <MetricsSection />
+                <TestimonialsSection />
+                <PricingSection />
+                <FAQSection />
+                <FinalCTA />
+            </main>
+
             <AlbertFooter />
         </div>
     );

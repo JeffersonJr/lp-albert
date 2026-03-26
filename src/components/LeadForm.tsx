@@ -61,6 +61,21 @@ const LeadForm = ({ id, variant = "light" }: { id?: string; variant?: "light" | 
         ? "w-full px-4 py-3 rounded-lg bg-primary-foreground/10 border border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary-foreground/30 transition-all text-sm"
         : "w-full px-4 py-3 rounded-lg bg-background border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-albert-teal/30 transition-all text-sm";
 
+    const maskPhone = (value: string) => {
+        const cleaned = value.replace(/\D/g, "");
+        const match = cleaned.match(/^(\d{0,2})(\d{0,5})(\d{0,4})$/);
+        if (!match) return value;
+        const part1 = match[1] ? `(${match[1]}` : "";
+        const part2 = match[2] ? `) ${match[2]}` : "";
+        const part3 = match[3] ? `-${match[3]}` : "";
+        return `${part1}${part2}${part3}`.trim().slice(0, 15);
+    };
+
+    const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const masked = maskPhone(e.target.value);
+        setForm({ ...form, phone: masked });
+    };
+
     if (submitted) {
         return (
             <motion.div
@@ -118,11 +133,10 @@ const LeadForm = ({ id, variant = "light" }: { id?: string; variant?: "light" | 
                     <Phone className={`absolute left-3 top-3.5 w-4 h-4 ${isDark ? "text-primary-foreground/40" : "text-muted-foreground"}`} />
                     <input
                         type="tel"
-                        placeholder="WhatsApp *"
+                        placeholder="WhatsApp (DDD + Número) *"
                         value={form.phone}
-                        onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                        onChange={handlePhoneChange}
                         className={`${inputClasses} pl-10`}
-                        maxLength={20}
                         required
                     />
                 </div>
@@ -130,11 +144,12 @@ const LeadForm = ({ id, variant = "light" }: { id?: string; variant?: "light" | 
                     <Building2 className={`absolute left-3 top-3.5 w-4 h-4 ${isDark ? "text-primary-foreground/40" : "text-muted-foreground"}`} />
                     <input
                         type="text"
-                        placeholder="Nome da imobiliária"
+                        placeholder="Nome da imobiliária *"
                         value={form.company}
                         onChange={(e) => setForm({ ...form, company: e.target.value })}
                         className={`${inputClasses} pl-10`}
                         maxLength={100}
+                        required
                     />
                 </div>
             </div>
@@ -153,7 +168,7 @@ const LeadForm = ({ id, variant = "light" }: { id?: string; variant?: "light" | 
                 {loading ? "Enviando..." : "Falar com especialista"}
             </Button>
             <p className={`text-xs text-center ${isDark ? "text-primary-foreground/50" : "text-muted-foreground"}`}>
-                ✓ Sem compromisso &nbsp;·&nbsp; ✓ Atendimento personalizado &nbsp;·&nbsp; ✓ Resposta em até 2h
+                ✓ Resultados Reais &nbsp;·&nbsp; ✓ Atendimento personalizado
             </p>
         </form>
     );

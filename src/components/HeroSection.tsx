@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Shield, Clock, Zap } from "lucide-react";
-import LeadForm from "./LeadForm";
+import LeadForm from "@/components/LeadForm";
 
 const HeroSection = () => {
     return (
@@ -10,7 +10,7 @@ const HeroSection = () => {
             <div className="absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full bg-albert-teal/[0.03] blur-3xl" />
 
             <div className="container mx-auto px-4 relative z-10">
-                <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+                <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                     {/* Left — Copy */}
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
@@ -23,7 +23,7 @@ const HeroSection = () => {
                             Usado por +500 imobiliárias no Brasil
                         </div>
 
-                        <h1 className="text-4xl md:text-5xl xl:text-[3.4rem] font-extrabold text-foreground leading-[1.1] mb-6">
+                        <h1 className="text-4xl md:text-5xl xl:text-[3.4rem] font-extrabold text-foreground leading-[1.15] mb-6 pb-2">
                             Você está perdendo{" "}
                             <span className="text-gradient">60% dos leads</span>{" "}
                             por demora no atendimento
@@ -36,11 +36,11 @@ const HeroSection = () => {
                         <div className="flex flex-col sm:flex-row gap-4 mb-6">
                             <div className="flex items-center gap-2 text-sm text-muted-foreground">
                                 <Clock className="w-4 h-4 text-albert-teal" />
-                                <span>Setup em menos de 24h</span>
+                                <span>Ativação Rápida</span>
                             </div>
                             <div className="flex items-center gap-2 text-sm text-muted-foreground">
                                 <Shield className="w-4 h-4 text-albert-teal" />
-                                <span>Sem compromisso</span>
+                                <span>Planos Flexíveis</span>
                             </div>
                         </div>
 

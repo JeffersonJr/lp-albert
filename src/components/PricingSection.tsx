@@ -34,7 +34,7 @@ const PricingSection = () => {
                         Escolha o plano ideal para sua operação
                     </h2>
                     <p className="text-muted-foreground mt-3 max-w-lg mx-auto">
-                        Sem fidelidade. Sem taxa de setup. Comece a converter mais hoje.
+                        Foco em resultados. Implementação IMEDIATA. Comece a converter mais hoje.
                     </p>
                 </div>
 
@@ -43,9 +43,10 @@ const PricingSection = () => {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="hidden md:block max-w-5xl mx-auto"
+                    className="hidden md:block max-w-5xl mx-auto overflow-hidden rounded-2xl border border-border"
                 >
-                    <div className="bg-background rounded-2xl border border-border shadow-card overflow-hidden">
+                    <div className="bg-background shadow-card overflow-x-auto">
+                        <div className="min-w-[850px]">
                         {/* Header */}
                         <div className="grid grid-cols-5 border-b border-border">
                             <div className="p-6 flex items-end">
@@ -73,7 +74,7 @@ const PricingSection = () => {
                             <div className="p-5 pl-6 text-sm text-muted-foreground">Fidelidade</div>
                             {plans.map((plan) => (
                                 <div key={plan.name} className="p-5 text-center text-sm font-medium text-foreground">
-                                    Sem fidelidade
+                                    Flexível
                                 </div>
                             ))}
                         </div>
@@ -102,6 +103,7 @@ const PricingSection = () => {
                                 </div>
                             ))}
                         </div>
+                        </div>
                     </div>
                 </motion.div>
 
@@ -126,7 +128,7 @@ const PricingSection = () => {
                             </div>
                             <div className="flex items-center justify-between py-2 border-b border-border/50">
                                 <span className="text-sm text-muted-foreground">Fidelidade</span>
-                                <span className="text-sm font-medium text-foreground">Sem fidelidade</span>
+                                <span className="text-sm font-medium text-foreground">Flexível</span>
                             </div>
                             {features.map((feature) => (
                                 <div key={feature} className="flex items-center justify-between py-2 border-b border-border/50">
@@ -158,7 +160,7 @@ const PricingSection = () => {
                 </div>
 
                 <p className="text-center text-xs text-muted-foreground mt-6">
-                    ✓ Sem fidelidade &nbsp;·&nbsp; ✓ Sem taxa de setup &nbsp;·&nbsp; ✓ Cancele quando quiser
+                    ✓ Planos Flexíveis &nbsp;·&nbsp; ✓ Implementação IMEDIATA &nbsp;·&nbsp; ✓ Cancele quando quiser
                 </p>
             </div>
         </section>

@@ -10,7 +10,7 @@ const logos = [
     { name: "Zap Imóveis", src: "https://albert.evolves.site/img/zap.svg" },
 ];
 
-const doubledLogos = [...logos, ...logos];
+const doubledLogos = [...logos, ...logos, ...logos, ...logos];
 
 const SocialProof = () => (
     <section className="py-12 bg-background border-y border-border overflow-hidden">
@@ -24,8 +24,8 @@ const SocialProof = () => (
             <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-background to-transparent z-10" />
             <motion.div
                 className="flex items-center gap-12 w-max"
-                animate={{ x: ["0%", "-50%"] }}
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                animate={{ x: ["0%", "-25%"] }}
+                transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
             >
                 {doubledLogos.map((logo, i) => (
                     <img
@@ -33,6 +33,8 @@ const SocialProof = () => (
                         src={logo.src}
                         alt={logo.name}
                         className="h-7 md:h-9 grayscale opacity-50 hover:opacity-80 transition-opacity shrink-0"
+                        width="120"
+                        height="36"
                     />
                 ))}
             </motion.div>

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import LeadForm from "./LeadForm";
+import LeadForm from "@/components/LeadForm";
 
 const FinalCTA = () => {
     return (
@@ -22,8 +22,8 @@ const FinalCTA = () => {
                         </p>
                     </div>
 
-                    <div className="bg-primary-foreground/10 backdrop-blur-sm rounded-2xl p-7 border border-primary-foreground/20">
-                        <LeadForm variant="dark" />
+                    <div className="bg-background rounded-2xl p-8 shadow-2xl border border-white/10">
+                        <LeadForm variant="light" />
                     </div>
                 </motion.div>
             </div>
