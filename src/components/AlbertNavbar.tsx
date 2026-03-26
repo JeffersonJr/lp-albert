@@ -17,7 +17,7 @@ const AlbertNavbar = () => {
     };
 
     return (
-        <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
+        <nav className="fixed top-0 left-0 right-0 z-50 bg-background/60 backdrop-blur-xl backdrop-saturate-150 border-b border-white/10 shadow-[0_1px_0_0_rgba(255,255,255,0.05)_inset]">
             <div className="container mx-auto flex items-center justify-between h-16 px-4">
                 <a href="#" className="flex items-center gap-2 outline-none focus-visible:ring-2 focus-visible:ring-albert-teal rounded-sm" aria-label="Voltar ao início">
                     <img 
@@ -61,7 +61,7 @@ const AlbertNavbar = () => {
             </div>
 
             {open && (
-                <div className="lg:hidden bg-background border-t border-border px-4 pb-4 shadow-xl">
+                <div className="lg:hidden bg-background/80 backdrop-blur-xl border-t border-white/10 px-4 pb-6 shadow-2xl animate-in fade-in slide-in-from-top-4 duration-300">
                     {navItems.map((item) => (
                         <a
                             key={item.label}
