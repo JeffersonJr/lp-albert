@@ -35,6 +35,8 @@ const SocialProof = () => (
                         className="h-7 md:h-9 grayscale opacity-50 hover:opacity-80 transition-opacity shrink-0"
                         width="120"
                         height="36"
+                        loading="lazy"
+                        decoding="async"
                     />
                 ))}
             </motion.div>

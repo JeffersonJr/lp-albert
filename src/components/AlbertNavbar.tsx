@@ -26,6 +26,8 @@ const AlbertNavbar = () => {
                         className="h-8 w-auto" 
                         width="118" 
                         height="32"
+                        loading="eager"
+                        fetchPriority="high"
                     />
                 </a>
 
