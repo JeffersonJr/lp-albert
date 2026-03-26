@@ -1,0 +1,162 @@
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Send, User, Mail, Phone, Building2, Loader2, CheckCircle } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
+
+const WHATSAPP_LINK = "https://wa.me/5513997591781?text=Ol%C3%A1,%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20o%20Albert%20IA";
+const FORM_ENDPOINT = "https://formsubmit.co/ajax/jefferson.campos@microsistec.com.br";
+
+interface FormData {
+    name: string;
+    email: string;
+    phone: string;
+    company: string;
+}
+
+const LeadForm = ({ id, variant = "light" }: { id?: string; variant?: "light" | "dark" }) => {
+    const [form, setForm] = useState<FormData>({ name: "", email: "", phone: "", company: "" });
+    const [loading, setLoading] = useState(false);
+    const [submitted, setSubmitted] = useState(false);
+    const { toast } = useToast();
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!form.name.trim() || !form.email.trim() || !form.phone.trim()) {
+            toast({ title: "Preencha todos os campos obrigatórios", variant: "destructive" });
+            return;
+        }
+        setLoading(true);
+
+        try {
+            const response = await fetch(FORM_ENDPOINT, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                },
+                body: JSON.stringify({
+                    Nome: form.name,
+                    Email: form.email,
+                    WhatsApp: form.phone,
+                    Imobiliária: form.company || "Não informada",
+                    _subject: `Novo lead Albert IA - ${form.name}`,
+                    _template: "table",
+                }),
+            });
+
+            if (!response.ok) throw new Error("Erro ao enviar");
+
+            setSubmitted(true);
+            toast({ title: "Recebemos seu contato! 🎉", description: "Um especialista entrará em contato em breve." });
+        } catch {
+            toast({ title: "Erro ao enviar. Tente novamente.", variant: "destructive" });
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const isDark = variant === "dark";
+    const inputClasses = isDark
+        ? "w-full px-4 py-3 rounded-lg bg-primary-foreground/10 border border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary-foreground/30 transition-all text-sm"
+        : "w-full px-4 py-3 rounded-lg bg-background border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-albert-teal/30 transition-all text-sm";
+
+    if (submitted) {
+        return (
+            <motion.div
+                id={id}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className={`rounded-2xl p-8 text-center ${isDark ? "" : "bg-albert-teal-light border border-albert-teal/20"}`}
+            >
+                <CheckCircle className={`w-16 h-16 mx-auto mb-4 ${isDark ? "text-primary-foreground" : "text-albert-teal"}`} />
+                <h3 className={`text-2xl font-bold mb-2 ${isDark ? "text-primary-foreground" : "text-foreground"}`}>
+                    Perfeito! Recebemos seu contato.
+                </h3>
+                <p className={`mb-6 ${isDark ? "text-primary-foreground/70" : "text-muted-foreground"}`}>
+                    Um especialista vai entrar em contato em até 2 horas úteis.
+                </p>
+                <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer">
+                    <Button variant={isDark ? "ctaLight" : "cta"} size="lg">
+                        Falar agora no WhatsApp
+                    </Button>
+                </a>
+            </motion.div>
+        );
+    }
+
+    return (
+        <form id={id} onSubmit={handleSubmit} className="space-y-4">
+            <div className="grid sm:grid-cols-2 gap-4">
+                <div className="relative">
+                    <User className={`absolute left-3 top-3.5 w-4 h-4 ${isDark ? "text-primary-foreground/40" : "text-muted-foreground"}`} />
+                    <input
+                        type="text"
+                        placeholder="Seu nome *"
+                        value={form.name}
+                        onChange={(e) => setForm({ ...form, name: e.target.value })}
+                        className={`${inputClasses} pl-10`}
+                        maxLength={100}
+                        required
+                    />
+                </div>
+                <div className="relative">
+                    <Mail className={`absolute left-3 top-3.5 w-4 h-4 ${isDark ? "text-primary-foreground/40" : "text-muted-foreground"}`} />
+                    <input
+                        type="email"
+                        placeholder="E-mail corporativo *"
+                        value={form.email}
+                        onChange={(e) => setForm({ ...form, email: e.target.value })}
+                        className={`${inputClasses} pl-10`}
+                        maxLength={255}
+                        required
+                    />
+                </div>
+            </div>
+            <div className="grid sm:grid-cols-2 gap-4">
+                <div className="relative">
+                    <Phone className={`absolute left-3 top-3.5 w-4 h-4 ${isDark ? "text-primary-foreground/40" : "text-muted-foreground"}`} />
+                    <input
+                        type="tel"
+                        placeholder="WhatsApp *"
+                        value={form.phone}
+                        onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                        className={`${inputClasses} pl-10`}
+                        maxLength={20}
+                        required
+                    />
+                </div>
+                <div className="relative">
+                    <Building2 className={`absolute left-3 top-3.5 w-4 h-4 ${isDark ? "text-primary-foreground/40" : "text-muted-foreground"}`} />
+                    <input
+                        type="text"
+                        placeholder="Nome da imobiliária"
+                        value={form.company}
+                        onChange={(e) => setForm({ ...form, company: e.target.value })}
+                        className={`${inputClasses} pl-10`}
+                        maxLength={100}
+                    />
+                </div>
+            </div>
+            <Button
+                type="submit"
+                variant={isDark ? "ctaLight" : "cta"}
+                size="xl"
+                className="w-full"
+                disabled={loading}
+            >
+                {loading ? (
+                    <Loader2 className="w-5 h-5 animate-spin mr-2" />
+                ) : (
+                    <Send className="w-5 h-5 mr-2" />
+                )}
+                {loading ? "Enviando..." : "Falar com especialista"}
+            </Button>
+            <p className={`text-xs text-center ${isDark ? "text-primary-foreground/50" : "text-muted-foreground"}`}>
+                ✓ Sem compromisso &nbsp;·&nbsp; ✓ Atendimento personalizado &nbsp;·&nbsp; ✓ Resposta em até 2h
+            </p>
+        </form>
+    );
+};
+
+export default LeadForm;
