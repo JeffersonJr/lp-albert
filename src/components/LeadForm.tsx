@@ -110,19 +110,20 @@ const LeadForm = ({ id, variant = "light" }: { id?: string; variant?: "light" | 
 
     return (
         <form id={id} onSubmit={handleSubmit} className="space-y-4">
+            <div className="relative">
+                <User className={`absolute left-3 top-3.5 w-4 h-4 ${isDark ? "text-primary-foreground/40" : "text-muted-foreground"}`} />
+                <input
+                    type="text"
+                    placeholder="Seu nome completo *"
+                    value={form.name}
+                    onChange={(e) => setForm({ ...form, name: e.target.value })}
+                    className={`${inputClasses} pl-10`}
+                    maxLength={100}
+                    required
+                />
+            </div>
+
             <div className="grid sm:grid-cols-2 gap-4">
-                <div className="relative">
-                    <User className={`absolute left-3 top-3.5 w-4 h-4 ${isDark ? "text-primary-foreground/40" : "text-muted-foreground"}`} />
-                    <input
-                        type="text"
-                        placeholder="Seu nome *"
-                        value={form.name}
-                        onChange={(e) => setForm({ ...form, name: e.target.value })}
-                        className={`${inputClasses} pl-10`}
-                        maxLength={100}
-                        required
-                    />
-                </div>
                 <div className="relative">
                     <Mail className={`absolute left-3 top-3.5 w-4 h-4 ${isDark ? "text-primary-foreground/40" : "text-muted-foreground"}`} />
                     <input
@@ -135,55 +136,64 @@ const LeadForm = ({ id, variant = "light" }: { id?: string; variant?: "light" | 
                         required
                     />
                 </div>
-            </div>
-            
-            <div className="grid sm:grid-cols-2 gap-4">
                 <div className="relative">
                     <Phone className={`absolute left-3 top-3.5 w-4 h-4 ${isDark ? "text-primary-foreground/40" : "text-muted-foreground"}`} />
                     <input
                         type="tel"
-                        placeholder="WhatsApp (DDD + Número) *"
+                        placeholder="WhatsApp *"
                         value={form.phone}
                         onChange={handlePhoneChange}
                         className={`${inputClasses} pl-10`}
                         required
                     />
                 </div>
+            </div>
+            
+            <div className="grid sm:grid-cols-2 gap-4">
                 <div className="relative">
                     <Briefcase className={`absolute left-3 top-3.5 w-4 h-4 ${isDark ? "text-primary-foreground/40" : "text-muted-foreground"}`} />
                     <select
                         value={form.cargo}
                         onChange={(e) => setForm({ ...form, cargo: e.target.value })}
-                        className={`${inputClasses} pl-10`}
+                        className={`${inputClasses} pl-10 pr-10`}
                         required
                     >
-                        <option value="" disabled>Cargo *</option>
+                        <option value="" disabled>Seu Cargo *</option>
                         <option value="Dono de imobiliária">Dono de imobiliária</option>
                         <option value="Corretor autônomo">Corretor autônomo</option>
                     </select>
+                    <div className="absolute right-3 top-4 pointer-events-none">
+                        <svg className={`w-4 h-4 ${isDark ? "text-primary-foreground/40" : "text-muted-foreground"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="9 5l7 7-7 7" className="rotate-90 origin-center" />
+                        </svg>
+                    </div>
                 </div>
-            </div>
-
-            <div className="relative">
-                <Coins className={`absolute left-3 top-3.5 w-4 h-4 ${isDark ? "text-primary-foreground/40" : "text-muted-foreground"}`} />
-                <select
-                    value={form.investimento}
-                    onChange={(e) => setForm({ ...form, investimento: e.target.value })}
-                    className={`${inputClasses} pl-10`}
-                    required
-                >
-                    <option value="" disabled>Qual valor disponível para investir no projeto? *</option>
-                    <option value="Até R$ 300,00">Até R$ 300,00</option>
-                    <option value="Até R$ 800,00">Até R$ 800,00</option>
-                    <option value="A partir de R$ 1.000">A partir de R$ 1.000</option>
-                </select>
+                <div className="relative">
+                    <Coins className={`absolute left-3 top-3.5 w-4 h-4 ${isDark ? "text-primary-foreground/40" : "text-muted-foreground"}`} />
+                    <select
+                        value={form.investimento}
+                        onChange={(e) => setForm({ ...form, investimento: e.target.value })}
+                        className={`${inputClasses} pl-10 pr-10`}
+                        required
+                    >
+                        <option value="" disabled>Investimento *</option>
+                        <option value="Até R$ 300,00">Até R$ 300,00</option>
+                        <option value="Até R$ 800,00">Até R$ 800,00</option>
+                        <option value="A partir de R$ 1.000">A partir de R$ 1.000</option>
+                    </select>
+                    <div className="absolute right-3 top-4 pointer-events-none">
+                        <svg className={`w-4 h-4 ${isDark ? "text-primary-foreground/40" : "text-muted-foreground"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="9 5l7 7-7 7" className="rotate-90 origin-center" />
+                        </svg>
+                    </div>
+                </div>
             </div>
 
             <Button
                 type="submit"
                 variant={isDark ? "ctaLight" : "cta"}
                 size="xl"
-                className="w-full"
+                className="w-full mt-2"
                 disabled={loading}
             >
                 {loading ? (
