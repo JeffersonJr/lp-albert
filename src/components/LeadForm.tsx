@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Send, User, Mail, Phone, Building2, Loader2, CheckCircle } from "lucide-react";
+import { Send, User, Mail, Phone, Briefcase, Coins, Loader2, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 
@@ -11,18 +11,25 @@ interface FormData {
     name: string;
     email: string;
     phone: string;
-    company: string;
+    cargo: string;
+    investimento: string;
 }
 
 const LeadForm = ({ id, variant = "light" }: { id?: string; variant?: "light" | "dark" }) => {
-    const [form, setForm] = useState<FormData>({ name: "", email: "", phone: "", company: "" });
+    const [form, setForm] = useState<FormData>({ 
+        name: "", 
+        email: "", 
+        phone: "", 
+        cargo: "", 
+        investimento: "" 
+    });
     const [loading, setLoading] = useState(false);
     const [submitted, setSubmitted] = useState(false);
     const { toast } = useToast();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (!form.name.trim() || !form.email.trim() || !form.phone.trim()) {
+        if (!form.name.trim() || !form.email.trim() || !form.phone.trim() || !form.cargo || !form.investimento) {
             toast({ title: "Preencha todos os campos obrigatórios", variant: "destructive" });
             return;
         }
@@ -39,7 +46,8 @@ const LeadForm = ({ id, variant = "light" }: { id?: string; variant?: "light" | 
                     Nome: form.name,
                     Email: form.email,
                     WhatsApp: form.phone,
-                    Imobiliária: form.company || "Não informada",
+                    Cargo: form.cargo,
+                    Investimento: form.investimento,
                     _subject: `Novo lead Albert IA - ${form.name}`,
                     _template: "table",
                 }),
@@ -58,8 +66,8 @@ const LeadForm = ({ id, variant = "light" }: { id?: string; variant?: "light" | 
 
     const isDark = variant === "dark";
     const inputClasses = isDark
-        ? "w-full px-4 py-3 rounded-lg bg-primary-foreground/10 border border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary-foreground/30 transition-all text-sm"
-        : "w-full px-4 py-3 rounded-lg bg-background border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-albert-teal/30 transition-all text-sm";
+        ? "w-full px-4 py-3 rounded-lg bg-primary-foreground/10 border border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary-foreground/30 transition-all text-sm appearance-none"
+        : "w-full px-4 py-3 rounded-lg bg-background border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-albert-teal/30 transition-all text-sm appearance-none";
 
     const maskPhone = (value: string) => {
         const cleaned = value.replace(/\D/g, "");
@@ -119,7 +127,7 @@ const LeadForm = ({ id, variant = "light" }: { id?: string; variant?: "light" | 
                     <Mail className={`absolute left-3 top-3.5 w-4 h-4 ${isDark ? "text-primary-foreground/40" : "text-muted-foreground"}`} />
                     <input
                         type="email"
-                        placeholder="E-mail corporativo *"
+                        placeholder="E-mail *"
                         value={form.email}
                         onChange={(e) => setForm({ ...form, email: e.target.value })}
                         className={`${inputClasses} pl-10`}
@@ -128,6 +136,7 @@ const LeadForm = ({ id, variant = "light" }: { id?: string; variant?: "light" | 
                     />
                 </div>
             </div>
+            
             <div className="grid sm:grid-cols-2 gap-4">
                 <div className="relative">
                     <Phone className={`absolute left-3 top-3.5 w-4 h-4 ${isDark ? "text-primary-foreground/40" : "text-muted-foreground"}`} />
@@ -141,18 +150,35 @@ const LeadForm = ({ id, variant = "light" }: { id?: string; variant?: "light" | 
                     />
                 </div>
                 <div className="relative">
-                    <Building2 className={`absolute left-3 top-3.5 w-4 h-4 ${isDark ? "text-primary-foreground/40" : "text-muted-foreground"}`} />
-                    <input
-                        type="text"
-                        placeholder="Nome da imobiliária *"
-                        value={form.company}
-                        onChange={(e) => setForm({ ...form, company: e.target.value })}
+                    <Briefcase className={`absolute left-3 top-3.5 w-4 h-4 ${isDark ? "text-primary-foreground/40" : "text-muted-foreground"}`} />
+                    <select
+                        value={form.cargo}
+                        onChange={(e) => setForm({ ...form, cargo: e.target.value })}
                         className={`${inputClasses} pl-10`}
-                        maxLength={100}
                         required
-                    />
+                    >
+                        <option value="" disabled>Cargo *</option>
+                        <option value="Dono de imobiliária">Dono de imobiliária</option>
+                        <option value="Corretor autônomo">Corretor autônomo</option>
+                    </select>
                 </div>
             </div>
+
+            <div className="relative">
+                <Coins className={`absolute left-3 top-3.5 w-4 h-4 ${isDark ? "text-primary-foreground/40" : "text-muted-foreground"}`} />
+                <select
+                    value={form.investimento}
+                    onChange={(e) => setForm({ ...form, investimento: e.target.value })}
+                    className={`${inputClasses} pl-10`}
+                    required
+                >
+                    <option value="" disabled>Qual valor disponível para investir no projeto? *</option>
+                    <option value="Até R$ 300,00">Até R$ 300,00</option>
+                    <option value="Até R$ 800,00">Até R$ 800,00</option>
+                    <option value="A partir de R$ 1.000">A partir de R$ 1.000</option>
+                </select>
+            </div>
+
             <Button
                 type="submit"
                 variant={isDark ? "ctaLight" : "cta"}
@@ -165,8 +191,9 @@ const LeadForm = ({ id, variant = "light" }: { id?: string; variant?: "light" | 
                 ) : (
                     <Send className="w-5 h-5 mr-2" />
                 )}
-                {loading ? "Enviando..." : "Falar com especialista"}
+                {loading ? "Enviando..." : "Quero o Albert atendendo meus leads"}
             </Button>
+            
             <div className={`text-xs text-center leading-relaxed h-auto ${isDark ? "text-primary-foreground/50" : "text-muted-foreground"}`}>
                 <span className="inline-block whitespace-nowrap">✓ Planos Flexíveis &nbsp;·&nbsp;</span>
                 <span className="inline-block whitespace-nowrap">✓ Resultados reais &nbsp;·&nbsp;</span>
