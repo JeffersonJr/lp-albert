@@ -16,7 +16,7 @@ const SocialProof = () => (
     <section className="py-12 bg-background border-y border-border overflow-hidden">
         <div className="container mx-auto px-4 text-center mb-8">
             <p className="text-xs font-semibold text-muted-foreground uppercase tracking-widest">
-                Tecnologia utilizada pelos maiores portais do Brasil
+                Integramos com os maiores portais do Brasil
             </p>
         </div>
         <div className="relative w-full">

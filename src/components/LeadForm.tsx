@@ -167,9 +167,12 @@ const LeadForm = ({ id, variant = "light" }: { id?: string; variant?: "light" | 
                 )}
                 {loading ? "Enviando..." : "Falar com especialista"}
             </Button>
-            <p className={`text-xs text-center ${isDark ? "text-primary-foreground/50" : "text-muted-foreground"}`}>
-                ✓ Resultados Reais &nbsp;·&nbsp; ✓ Atendimento personalizado
-            </p>
+            <div className={`text-xs text-center leading-relaxed h-auto ${isDark ? "text-primary-foreground/50" : "text-muted-foreground"}`}>
+                <span className="inline-block whitespace-nowrap">✓ Planos Flexíveis &nbsp;·&nbsp;</span>
+                <span className="inline-block whitespace-nowrap">✓ Resultados reais &nbsp;·&nbsp;</span>
+                <span className="inline-block whitespace-nowrap text-nowrap">✓ Atendimento personalizado &nbsp;·&nbsp;</span>
+                <span className="block sm:inline-block whitespace-nowrap">✓ Cancele quando quiser</span>
+            </div>
         </form>
     );
 };

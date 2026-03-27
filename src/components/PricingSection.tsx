@@ -34,7 +34,7 @@ const PricingSection = () => {
                         Escolha o plano ideal para sua operação
                     </h2>
                     <p className="text-muted-foreground mt-3 max-w-lg mx-auto">
-                        Foco em resultados. Implementação IMEDIATA. Comece a converter mais hoje.
+                        Foco em resultados. Comece a converter mais hoje.
                     </p>
                 </div>
 
@@ -47,62 +47,62 @@ const PricingSection = () => {
                 >
                     <div className="bg-background shadow-card overflow-x-auto">
                         <div className="min-w-[850px]">
-                        {/* Header */}
-                        <div className="grid grid-cols-5 border-b border-border">
-                            <div className="p-6 flex items-end">
-                                <h3 className="text-xl font-bold text-foreground">Atendimento Mensal</h3>
-                            </div>
-                            {plans.map((plan) => (
-                                <div key={plan.name} className="p-6 text-center">
-                                    <span className="text-3xl font-extrabold text-foreground">{plan.name}</span>
+                            {/* Header */}
+                            <div className="grid grid-cols-5 border-b border-border">
+                                <div className="p-6 flex items-end">
+                                    <h3 className="text-xl font-bold text-foreground">Atendimento Mensal</h3>
                                 </div>
-                            ))}
-                        </div>
-
-                        {/* Preço */}
-                        <div className="grid grid-cols-5 border-b border-border/50">
-                            <div className="p-5 pl-6 text-sm text-muted-foreground">Preço</div>
-                            {plans.map((plan) => (
-                                <div key={plan.name} className="p-5 text-center text-sm font-medium text-foreground">
-                                    Sob consulta
-                                </div>
-                            ))}
-                        </div>
-
-                        {/* Fidelidade */}
-                        <div className="grid grid-cols-5 border-b border-border/50 bg-muted/30">
-                            <div className="p-5 pl-6 text-sm text-muted-foreground">Fidelidade</div>
-                            {plans.map((plan) => (
-                                <div key={plan.name} className="p-5 text-center text-sm font-medium text-foreground">
-                                    Flexível
-                                </div>
-                            ))}
-                        </div>
-
-                        {/* Feature rows */}
-                        {features.map((feature, i) => (
-                            <div
-                                key={feature}
-                                className={`grid grid-cols-5 border-b border-border/50 ${i % 2 === 0 ? "" : "bg-muted/30"}`}
-                            >
-                                <div className="p-5 pl-6 text-sm text-muted-foreground">{feature}</div>
                                 {plans.map((plan) => (
-                                    <div key={plan.name} className="p-5 flex justify-center">
-                                        <Check className="w-5 h-5 text-albert-teal" />
+                                    <div key={plan.name} className="p-6 text-center">
+                                        <span className="text-3xl font-extrabold text-foreground">{plan.name}</span>
                                     </div>
                                 ))}
                             </div>
-                        ))}
 
-                        {/* Reunião Estratégica */}
-                        <div className="grid grid-cols-5">
-                            <div className="p-5 pl-6 text-sm font-bold text-foreground">Reunião Estratégica (consultor)</div>
-                            {plans.map((plan) => (
-                                <div key={plan.name} className="p-5 text-center text-sm font-medium text-foreground">
-                                    {plan.reunioes}
+                            {/* Preço */}
+                            <div className="grid grid-cols-5 border-b border-border/50">
+                                <div className="p-5 pl-6 text-sm text-muted-foreground">Preço</div>
+                                {plans.map((plan) => (
+                                    <div key={plan.name} className="p-5 text-center text-sm font-medium text-foreground">
+                                        Sob consulta
+                                    </div>
+                                ))}
+                            </div>
+
+                            {/* Fidelidade */}
+                            <div className="grid grid-cols-5 border-b border-border/50 bg-muted/30">
+                                <div className="p-5 pl-6 text-sm text-muted-foreground">Fidelidade</div>
+                                {plans.map((plan) => (
+                                    <div key={plan.name} className="p-5 text-center text-sm font-medium text-foreground">
+                                        Flexível
+                                    </div>
+                                ))}
+                            </div>
+
+                            {/* Feature rows */}
+                            {features.map((feature, i) => (
+                                <div
+                                    key={feature}
+                                    className={`grid grid-cols-5 border-b border-border/50 ${i % 2 === 0 ? "" : "bg-muted/30"}`}
+                                >
+                                    <div className="p-5 pl-6 text-sm text-muted-foreground">{feature}</div>
+                                    {plans.map((plan) => (
+                                        <div key={plan.name} className="p-5 flex justify-center">
+                                            <Check className="w-5 h-5 text-albert-teal" />
+                                        </div>
+                                    ))}
                                 </div>
                             ))}
-                        </div>
+
+                            {/* Reunião Estratégica */}
+                            <div className="grid grid-cols-5">
+                                <div className="p-5 pl-6 text-sm font-bold text-foreground">Reunião Estratégica (consultor)</div>
+                                {plans.map((plan) => (
+                                    <div key={plan.name} className="p-5 text-center text-sm font-medium text-foreground">
+                                        {plan.reunioes}
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </motion.div>
@@ -159,9 +159,12 @@ const PricingSection = () => {
                     </Button>
                 </div>
 
-                <p className="text-center text-xs text-muted-foreground mt-6">
-                    ✓ Planos Flexíveis &nbsp;·&nbsp; ✓ Implementação IMEDIATA &nbsp;·&nbsp; ✓ Cancele quando quiser
-                </p>
+                <div className="text-center text-xs text-muted-foreground mt-6 leading-relaxed">
+                    <span className="inline-block whitespace-nowrap">✓ Planos Flexíveis &nbsp;·&nbsp;</span>
+                    <span className="inline-block whitespace-nowrap">✓ Resultados reais &nbsp;·&nbsp;</span>
+                    <span className="inline-block whitespace-nowrap">✓ Atendimento personalizado &nbsp;·&nbsp;</span>
+                    <span className="block sm:inline-block whitespace-nowrap">✓ Cancele quando quiser</span>
+                </div>
             </div>
         </section>
     );
