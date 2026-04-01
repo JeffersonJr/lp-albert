@@ -1,13 +1,12 @@
 import { motion } from "framer-motion";
 
 const logos = [
-    { name: "Chaves na Mão", src: "https://albert.evolves.site/img/chaves%20na%20m%C3%A3o.svg" },
-    { name: "Imovel Web", src: "https://albert.evolves.site/img/imovel%20web.svg" },
-    { name: "Lopes", src: "https://albert.evolves.site/img/lopes.svg" },
-    { name: "Net Imóveis", src: "https://albert.evolves.site/img/netimoveis.svg" },
-    { name: "Quinto Andar", src: "https://albert.evolves.site/img/quinto%20andar.svg" },
-    { name: "Viva Real", src: "https://albert.evolves.site/img/viva%20real.svg" },
-    { name: "Zap Imóveis", src: "https://albert.evolves.site/img/zap.svg" },
+    { name: "Chaves na Mão", src: "/img/chaves-na-mao.svg" },
+    { name: "Imovel Web", src: "/img/imovel-web.svg" },
+    { name: "Net Imóveis", src: "/img/netimoveis.svg" },
+    { name: "Quinto Andar", src: "/img/quinto-andar.svg" },
+    { name: "Viva Real", src: "/img/viva-real.svg" },
+    { name: "Zap Imóveis", src: "/img/zap.svg" },
 ];
 
 const doubledLogos = [...logos, ...logos, ...logos, ...logos];
